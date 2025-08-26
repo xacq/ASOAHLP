@@ -1,0 +1,13 @@
+<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7a44b727_002D634e_002D4fd6_002Da4cf_002D3fd3497bd7c2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="FixingTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B0530F10-0238-49A9-93B0-8EF412E90BCF::.NETFramework,Version=v4.6.2::log4net.Tests.Core.FixingTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d5b74ad3_002D7660_002D43e7_002D8689_002D1c74bcf17163/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All_ShouldContainAllFlags" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B0530F10-0238-49A9-93B0-8EF412E90BCF::.NETFramework,Version=v4.6.2::log4net.Tests.Core.FixingTest.All_ShouldContainAllFlags&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B0530F10-0238-49A9-93B0-8EF412E90BCF::.NETFramework,Version=v4.6.2::log4net.Tests.Core.FixingTest.TestUnfixedValues&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B0530F10-0238-49A9-93B0-8EF412E90BCF::.NETFramework,Version=v4.6.2::log4net.Tests.Context.ThreadContextTest.PropertiesShouldBeThreadSafe&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
