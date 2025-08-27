@@ -137,6 +137,26 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_documentos_miembro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_documentos_miembro` (
+  `Doc_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Mi_id` INT(11) NOT NULL,
+  `tipo_documento` VARCHAR(100) NULL DEFAULT NULL,
+  `ruta_archivo` VARCHAR(200) NULL DEFAULT NULL,
+  `fecha_subida` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Doc_id`),
+  INDEX `fk_documento_miembro_idx` (`Mi_id` ASC),
+  CONSTRAINT `fk_documento_miembro`
+    FOREIGN KEY (`Mi_id`)
+    REFERENCES `dbasochipo`.`tbl_miembros` (`Mi_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
 -- Table `dbasochipo`.`tbl_auspiciantes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_auspiciantes` (
