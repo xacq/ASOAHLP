@@ -49,12 +49,12 @@ require 'header.php';
                             <th>Fecha de<p>Nacimiento</p></th>
                             <th>Celular</th>
                             <th>Email</th>
-                            <th>Departamento</th>
+                            <th>Ciudad</th>
                             <th>Ocupacion</th>
                             <th>Direccion</th>
                             <th>Tiempo</th>
                             <th>CI</th>
-                            <th>Civil</th>
+                            <th>Estado Civil</th>
                             <th>Carnet <p>Discapacidad</p></th>
                             <th>Foto</th>
                             <th>Estado</th>
@@ -68,12 +68,12 @@ require 'header.php';
                             <th>Fecha de<p>Nacimiento</p></th>
                             <th>Celular</th>
                             <th>Email</th>
-                            <th>Departamento</th>
+                            <th>Ciudad</th>
                             <th>Ocupacion</th>
                             <th>Direccion</th>
                             <th>Tiempo</th>
                             <th>CI</th>
-                            <th>Civil</th>
+                            <th>Estado Civil</th>
                             <th>Carnet <p>Discapacidad</p></th>
                             <th>Foto</th>
                             <th>Estado</th>
@@ -116,17 +116,13 @@ require 'header.php';
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Departamento:</label>
-                            <select class="form-control select-picker" name="Mi_Departamento" id="Mi_Departamento">
-                              <option selected>Seleccionar departamento</option>  
-                              <option value="La Paz">La Paz</option>
-                              <option value="Oruro">Oruro</option>
-                              <option value="Potosi">Potosi</option>
-                              <option value="Cochabamba">Cochabamba</option>
-                              <option value="Chuquisaca">Chuquisaca</option>
-                              <option value="Tarija">Tarija</option>
-                              <option value="Pando">Pando</option>
-                              <option value="Beni">Beni</option>
-                              <option value="Santa Cruz">Santa Cruz</option>
+                            <select class="form-control select-picker" name="departamento_id" id="departamento_id">
+                            </select>
+                          </div>
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Ciudad:</label>
+                            <select class="form-control select-picker" name="ciudad_id" id="ciudad_id">
                             </select>
                           </div>
 
@@ -152,12 +148,7 @@ require 'header.php';
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Estado Civil:</label>
-                            <select class="form-control select-picker" name="Civil" id="Civil">
-                              <option selected>Seleccionar estado Civil</option> 
-                              <option value="Soltero/a">Soltero/a</option>
-                              <option value="Casado/a">Casado/a</option>
-                              <option value="Divorciado/a">Divorciado/a</option>
-                              <option value="Otros">Otros</option>
+                            <select class="form-control select-picker" name="estado_civil_id" id="estado_civil_id">
                             </select>
                           </div>
 

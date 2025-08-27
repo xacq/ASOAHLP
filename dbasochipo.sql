@@ -40,6 +40,43 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_estado_civil`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_estado_civil` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_departamentos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_departamentos` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_ciudades`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_ciudades` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `departamento_id` INT(11) NOT NULL,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ciudad_departamento_idx` (`departamento_id` ASC),
+  CONSTRAINT `fk_ciudad_departamento`
+    FOREIGN KEY (`departamento_id`)
+    REFERENCES `dbasochipo`.`tbl_departamentos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
 -- Table `dbasochipo`.`tbl_miembros`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_miembros` (
@@ -49,16 +86,28 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_miembros` (
   `Mi_FechaNacimiento` DATE NULL DEFAULT NULL,
   `Mi_Celular` VARCHAR(100) NULL DEFAULT NULL,
   `Mi_Email` VARCHAR(100) NULL DEFAULT NULL,
-  `Mi_Departamento` VARCHAR(100) NULL DEFAULT NULL,
+  `ciudad_id` INT(11) NULL DEFAULT NULL,
   `Mi_Ocupacion` VARCHAR(100) NULL DEFAULT NULL,
   `Mi_Direccion` VARCHAR(200) NULL DEFAULT NULL,
   `Mi_tiempo` VARCHAR(50) NULL DEFAULT NULL,
   `CI` VARCHAR(50) NULL DEFAULT NULL,
-  `Civil` VARCHAR(50) NULL DEFAULT NULL,
+  `estado_civil_id` INT(11) NULL DEFAULT NULL,
   `CarnetDiscapacidad` VARCHAR(50) NULL DEFAULT NULL,
   `imagen` VARCHAR(50) NOT NULL,
   `condicion` TINYINT(4) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`Mi_id`))
+  PRIMARY KEY (`Mi_id`),
+  INDEX `fk_miembros_ciudad_idx` (`ciudad_id` ASC),
+  INDEX `fk_miembros_estado_civil_idx` (`estado_civil_id` ASC),
+  CONSTRAINT `fk_miembros_ciudad`
+    FOREIGN KEY (`ciudad_id`)
+    REFERENCES `dbasochipo`.`tbl_ciudades` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_miembros_estado_civil`
+    FOREIGN KEY (`estado_civil_id`)
+    REFERENCES `dbasochipo`.`tbl_estado_civil` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb4;
