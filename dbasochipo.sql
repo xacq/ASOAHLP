@@ -364,11 +364,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `dbasochipo`.`usuario_permiso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
-  `idusuario_permiso` INT NOT NULL,
-  `MeDi_id` INT NOT NULL,
+  -- Table `dbasochipo`.`usuario_permiso`
+  -- -----------------------------------------------------
+  CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
+    `idusuario_permiso` INT NOT NULL,
+    `MeDi_id` INT NOT NULL,
   `idpermiso` INT NOT NULL,
   PRIMARY KEY (`idusuario_permiso`),
   INDEX `fk_usuariopermiso_mesadirectiva_idx` (`MeDi_id` ASC),
@@ -383,9 +383,29 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
     REFERENCES `dbasochipo`.`permiso` (`idpermiso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_alertas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_alertas` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tipo_alerta` VARCHAR(50) NOT NULL,
+  `Mi_id` INT(11) NOT NULL,
+  `fecha` DATE NOT NULL,
+  `leida` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  INDEX `fk_alerta_miembro_idx` (`Mi_id` ASC),
+  CONSTRAINT `fk_alerta_miembro`
+    FOREIGN KEY (`Mi_id`)
+    REFERENCES `dbasochipo`.`tbl_miembros` (`Mi_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+  SET SQL_MODE=@OLD_SQL_MODE;
+  SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+  SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
