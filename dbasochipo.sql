@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_miembros` (
   `imagen` VARCHAR(50) NOT NULL,
   `Mi_Estado` ENUM('Activo','Inactivo') NOT NULL DEFAULT 'Activo',
   PRIMARY KEY (`Mi_id`),
+  INDEX `CI_idx` (`CI` ASC),
   INDEX `fk_miembros_ciudad_idx` (`ciudad_id` ASC),
   INDEX `fk_miembros_estado_civil_idx` (`estado_civil_id` ASC),
   CONSTRAINT `fk_miembros_ciudad`

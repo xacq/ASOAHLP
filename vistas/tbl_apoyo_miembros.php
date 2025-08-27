@@ -40,6 +40,14 @@ require 'header.php';
 
                     <!-- el div de listadoregistros -->
                     <div class="panel-body table-responsive" id="listadoregistros">
+                      <div class="row">
+                        <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                          <input type="text" class="form-control" id="ciBuscar" placeholder="Buscar por CI">
+                        </div>
+                        <div class="form-group col-md-2 col-sm-6 col-xs-12">
+                          <button class="btn btn-primary" type="button" onclick="buscarPorCI()">Buscar</button>
+                        </div>
+                      </div>
                       <!-- el div de tbllistado donde se usa el datatable que se llama desde el categoria.js -->
                         <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>

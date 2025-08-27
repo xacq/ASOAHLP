@@ -74,6 +74,15 @@ function listar(){
         }).DataTable();
 }
 
+function buscarPorCI(){
+    var ci = $("#ciBuscar").val();
+    if(ci){
+        tabla.ajax.url('../ajax/tbl_apoyo_miembros.php?op=buscarPorCI&CI='+ci).load();
+    }else{
+        tabla.ajax.url('../ajax/tbl_apoyo_miembros.php?op=listar').load();
+    }
+}
+
 
 function guardaryeditar(e){
     e.preventDefault();  // no se realiza la accion por defecto
