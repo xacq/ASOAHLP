@@ -20,6 +20,7 @@ $CI = isset($_POST["CI"])? limpiarCadena($_POST["CI"]) : "";
 $estado_civil_id = isset($_POST["estado_civil_id"])? limpiarCadena($_POST["estado_civil_id"]) : "";
 $CarnetDiscapacidad = isset($_POST["CarnetDiscapacidad"])? limpiarCadena($_POST["CarnetDiscapacidad"]) : "";
 $imagen = isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]) : "";
+$tipo_documento = isset($_POST["tipo_documento"])? limpiarCadena($_POST["tipo_documento"]) : "";
 
 // desde un archivo js se hara una peticion a este archivo mandando una opcion
 // preguntamos que opcion es la que nos pidieron
@@ -38,15 +39,24 @@ switch ($_GET["op"]){
                                 move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/usuarios/" . $imagen);
                         }
                 }
-                // es el mismo case por que nos daremos cuenta con el idcategoria si llega vacio o con datos
                 if (empty($Mi_id)){
-                        $rspta = $tbl_miembros->insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen); //rsta viene del modelo 1:ok 0:algo va mal
-                        echo $rspta ? "Tbl_miembros registrado" : "Tbl_miembros no se pudo registrar";
+                        $Mi_id = $tbl_miembros->insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen);
+                        $mensaje = $Mi_id ? "Tbl_miembros registrado" : "Tbl_miembros no se pudo registrar";
                 }
                 else {
                         $rspta = $tbl_miembros->editar($Mi_id,$Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen);
-                        echo $rspta ? "Tbl_miembros actualizada" : "Tbl_miembros no se pudo actualizar";
+                        $mensaje = $rspta ? "Tbl_miembros actualizada" : "Tbl_miembros no se pudo actualizar";
                 }
+
+                if($Mi_id && file_exists($_FILES['documento']['tmp_name']) && is_uploaded_file($_FILES['documento']['tmp_name'])){
+                        $ext = explode(".", $_FILES["documento"]["name"]);
+                        if ($_FILES['documento']['type'] == "application/pdf"){
+                                $documento = round(microtime(true)) . '.' . end($ext);
+                                move_uploaded_file($_FILES["documento"]["tmp_name"], "../files/documentos/" . $documento);
+                                $tbl_miembros->insertarDocumento($Mi_id,$tipo_documento,$documento);
+                        }
+                }
+                echo $mensaje;
         break;
 
         case 'desactivar':
@@ -132,6 +142,13 @@ switch ($_GET["op"]){
                                 {
                                         echo '<option value=' . $reg->id . '>' . $reg->nombre . '</option>';
                                 }
+        break;
+
+        case 'listarDocumentos':
+                $rspta = $tbl_miembros->listarDocumentos($Mi_id);
+                while ($reg = $rspta->fetch_object()){
+                        echo '<tr><td>'.$reg->tipo_documento.'</td><td><a href="../files/documentos/'.$reg->ruta_archivo.'" target="_blank">Descargar</a></td><td>'.$reg->fecha_subida.'</td></tr>';
+                }
         break;
 }
 ?>
