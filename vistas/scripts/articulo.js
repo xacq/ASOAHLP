@@ -98,7 +98,7 @@ function guardaryeditar(e){
                 //bootbox.alert(datos);	          
                 alert(datos);	          
                 mostrarform(false);
-                tabla.ajax.reload();
+                tabla.ajax.reload(null,false);
         }
     });
     limpiar();
@@ -134,7 +134,7 @@ function desactivar(idarticulo){
         {
         	$.post("../ajax/articulo.php?op=desactivar", {idarticulo : idarticulo}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 	//})
@@ -148,7 +148,7 @@ function activar(idarticulo){
         {
         	$.post("../ajax/articulo.php?op=activar", {idarticulo : idarticulo}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 	//})

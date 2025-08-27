@@ -118,6 +118,7 @@ function guardaryeditar(e){
                 //bootbox.alert(datos);
                 alert(datos);
                 mostrarform(false);
+                tabla.ajax.reload(null,false);
                 tabla.ajax.reload();
                 listarDocumentos($("#Mi_id").val());
         }
@@ -170,7 +171,7 @@ function desactivar(Mi_id){
     {
         $.post("../ajax/tbl_miembros.php?op=desactivar", {Mi_id : Mi_id}, function(e){
             alert(e);
-            tabla.ajax.reload();
+            tabla.ajax.reload(null,false);
         });	
     }
 }
@@ -181,7 +182,7 @@ function activar(Mi_id){
     {
         $.post("../ajax/tbl_miembros.php?op=activar", {Mi_id : Mi_id}, function(e){
             alert(e);
-            tabla.ajax.reload();
+            tabla.ajax.reload(null,false);
         });	
     }
 }

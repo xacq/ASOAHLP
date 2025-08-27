@@ -107,7 +107,7 @@ function guardaryeditar(e)
 	    {                    
 	          alert(datos);	          
 	          mostrarform(false);
-	          tabla.ajax.reload();
+	          tabla.ajax.reload(null,false);
 	    }
 
 	});
@@ -153,7 +153,7 @@ function desactivar(idusuario)
         {
         	$.post("../ajax/usuario.php?op=desactivar", {idusuario : idusuario}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 //	})
@@ -168,7 +168,7 @@ function activar(idusuario)
         {
         	$.post("../ajax/usuario.php?op=activar", {idusuario : idusuario}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 	//})
