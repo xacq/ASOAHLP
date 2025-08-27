@@ -347,6 +347,7 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_tiposhipoacusia` (
   `hipo_id` INT(11) NOT NULL AUTO_INCREMENT,
   `hipo_nombre` VARCHAR(200) NULL DEFAULT NULL,
   `hipo_Descripcion` LONGTEXT NULL DEFAULT NULL,
+  `imagen` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`hipo_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
