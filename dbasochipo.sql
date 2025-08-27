@@ -409,6 +409,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+
+-- Table `dbasochipo`.`tbl_historial_miembro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_historial_miembro` (
+  `HMi_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Mi_id` INT(11) NOT NULL,
+  `descripcion` VARCHAR(255) NOT NULL,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`HMi_id`),
+  INDEX `fk_historial_miembro_miembros_idx` (`Mi_id` ASC),
+  CONSTRAINT `fk_historial_miembro_miembros`
+    FOREIGN KEY (`Mi_id`)
+    REFERENCES `dbasochipo`.`tbl_miembros` (`Mi_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
 -- Table `dbasochipo`.`tbl_alertas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_alertas` (
