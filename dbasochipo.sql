@@ -428,6 +428,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
+
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_reportes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_reportes` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `reporte` VARCHAR(255) NOT NULL,
+  `fecha_generacion` DATETIME NOT NULL,
+  `usuario_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
   SET SQL_MODE=@OLD_SQL_MODE;
   SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
   SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

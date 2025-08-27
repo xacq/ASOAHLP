@@ -157,6 +157,7 @@ if (strlen(session_id()) < 1){
             <li class="nav-item"><a href="inventario.php"><i class="fa fa-circle-o"></i> Inventario</a></li>
             <li class="nav-item"><a href="multas.php"><i class="fa fa-circle-o"></i> Multas</a></li>
             <li class="nav-item"><a href="especialidades.php"><i class="fa fa-circle-o"></i> Especialidades</a></li>                              
+            <li class="nav-item"><a href="reportes.php"><i class="fa fa-circle-o"></i> Reportes</a></li>
           </ul>
         </li>
         <?php
@@ -193,6 +194,7 @@ if (strlen(session_id()) < 1){
           </a>
           <ul class="treeview-menu">
             <li class="nav-item"><a href="especialidades.php"><i class="fa fa-circle-o"></i> Especialidades </a></li>
+            <li class="nav-item"><a href="reportes.php"><i class="fa fa-circle-o"></i> Reportes</a></li>
             <li class="nav-item"><a href="tiposdehipoacusia.php"><i class="fa fa-circle-o"></i> Tipos de Hipoacusia</a></li>
             <li class="nav-item"><a href="tiposdeapoyo.php"><i class="fa fa-circle-o"></i> Tipos de Apoyo </a></li>
             <li class="nav-item"><a href="tiposdeinventario.php"><i class="fa fa-circle-o"></i> Tipos de Inventario</a></li>
