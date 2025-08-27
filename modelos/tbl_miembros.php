@@ -8,15 +8,14 @@ Class Tbl_miembros{
     }
 
     // insertar
-    public function insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$Mi_Departamento,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$Civil,$CarnetDiscapacidad,$imagen){     
-        $sql = "INSERT INTO tbl_miembros (Mi_Nombres,Mi_Apellido,Mi_FechaNacimiento,Mi_Celular,Mi_Email,Mi_Departamento,Mi_Ocupacion,Mi_Direccion,Mi_tiempo,CI,Civil,CarnetDiscapacidad,imagen,condicion) VALUES ('$Mi_Nombres','$Mi_Apellido','$Mi_FechaNacimiento','$Mi_Celular','$Mi_Email','$Mi_Departamento','$Mi_Ocupacion','$Mi_Direccion','$Mi_tiempo','$CI','$Civil','$CarnetDiscapacidad','$imagen', '1')";
+    public function insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen){
+        $sql = "INSERT INTO tbl_miembros (Mi_Nombres,Mi_Apellido,Mi_FechaNacimiento,Mi_Celular,Mi_Email,ciudad_id,Mi_Ocupacion,Mi_Direccion,Mi_tiempo,CI,estado_civil_id,CarnetDiscapacidad,imagen,condicion) VALUES ('$Mi_Nombres','$Mi_Apellido','$Mi_FechaNacimiento','$Mi_Celular','$Mi_Email','$ciudad_id','$Mi_Ocupacion','$Mi_Direccion','$Mi_tiempo','$CI','$estado_civil_id','$CarnetDiscapacidad','$imagen', '1')";
         return ejecutarConsulta($sql);
     }
 
     // editar
-      public function editar($Mi_id,$Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$Mi_Departamento,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$Civil,$CarnetDiscapacidad,$imagen){
-        $sql = "UPDATE tbl_miembros SET Mi_Nombres='$Mi_Nombres',Mi_Apellido='$Mi_Apellido',Mi_FechaNacimiento='$Mi_FechaNacimiento',Mi_Celular='$Mi_Celular',Mi_Email='$Mi_Email',Mi_Departamento='$Mi_Departamento',Mi_Ocupacion='$Mi_Ocupacion',Mi_Direccion='$Mi_Direccion',Mi_tiempo='$Mi_tiempo',CI='$CI',Civil='$Civil',CarnetDiscapacidad='$CarnetDiscapacidad',imagen='$imagen' 
-        WHERE Mi_id='$Mi_id'";
+      public function editar($Mi_id,$Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen){
+        $sql = "UPDATE tbl_miembros SET Mi_Nombres='$Mi_Nombres',Mi_Apellido='$Mi_Apellido',Mi_FechaNacimiento='$Mi_FechaNacimiento',Mi_Celular='$Mi_Celular',Mi_Email='$Mi_Email',ciudad_id='$ciudad_id',Mi_Ocupacion='$Mi_Ocupacion',Mi_Direccion='$Mi_Direccion',Mi_tiempo='$Mi_tiempo',CI='$CI',estado_civil_id='$estado_civil_id',CarnetDiscapacidad='$CarnetDiscapacidad',imagen='$imagen' WHERE Mi_id='$Mi_id'";
         return ejecutarConsulta($sql);
         //UPDATE `tbl_miembros` SET `Mi_FechaNacimiento` = '1996-08-03' WHERE `tbl_miembros`.`Mi_id` = 9
     }
@@ -33,22 +32,40 @@ Class Tbl_miembros{
         return ejecutarConsulta($sql);
     }
 
-    // mostrar UN registro 
+    // mostrar UN registro
     public function mostrar($Mi_id){
-        $sql = "SELECT * FROM tbl_miembros WHERE Mi_id='$Mi_id'";
+        $sql = "SELECT m.*, c.departamento_id FROM tbl_miembros m LEFT JOIN tbl_ciudades c ON m.ciudad_id=c.id WHERE Mi_id='$Mi_id'";
         return ejecutarConsultaSimpleFila($sql);
     }
 
-    // listar TODOS los registros 
+    // listar TODOS los registros
     public function listar(){
-        $sql = "SELECT * FROM tbl_miembros";
+        $sql = "SELECT m.*, c.nombre AS Ciudad, d.nombre AS Departamento, e.nombre AS EstadoCivil FROM tbl_miembros m LEFT JOIN tbl_ciudades c ON m.ciudad_id=c.id LEFT JOIN tbl_departamentos d ON c.departamento_id=d.id LEFT JOIN tbl_estado_civil e ON m.estado_civil_id=e.id";
         return ejecutarConsulta($sql);
     }
 
     public function select()
-	{
-		$sql="SELECT * FROM tbl_miembros WHERE condicion=1";
-		return ejecutarConsulta($sql);		
-	}
+        {
+                $sql="SELECT * FROM tbl_miembros WHERE condicion=1";
+                return ejecutarConsulta($sql);
+        }
+
+    public function selectEstadoCivil()
+        {
+                $sql="SELECT * FROM tbl_estado_civil";
+                return ejecutarConsulta($sql);
+        }
+
+    public function selectDepartamentos()
+        {
+                $sql="SELECT * FROM tbl_departamentos";
+                return ejecutarConsulta($sql);
+        }
+
+    public function selectCiudades($departamento_id)
+        {
+                $sql="SELECT * FROM tbl_ciudades WHERE departamento_id='$departamento_id'";
+                return ejecutarConsulta($sql);
+        }
 }
 ?>

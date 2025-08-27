@@ -10,7 +10,24 @@ function init(){
     });
 
     $("#imagenmuestra").hide();
-    
+
+    $.post("../ajax/tbl_miembros.php?op=selectEstadoCivil", function(r){
+        $("#estado_civil_id").html(r);
+        $('#estado_civil_id').selectpicker('refresh');
+    });
+
+    $.post("../ajax/tbl_miembros.php?op=selectDepartamentos", function(r){
+        $("#departamento_id").html(r);
+        $('#departamento_id').selectpicker('refresh');
+    });
+
+    $("#departamento_id").on('change', function(){
+        var id = $(this).val();
+        $.post("../ajax/tbl_miembros.php?op=selectCiudades&departamento_id="+id, function(r){
+            $("#ciudad_id").html(r);
+            $('#ciudad_id').selectpicker('refresh');
+        });
+    });
 }
 
 function limpiar(){
@@ -20,12 +37,20 @@ function limpiar(){
     $("#Mi_FechaNacimiento").val("");
 	$("#Mi_Celular").val("");
 	$("#Mi_Email").val("");
-	$("#Mi_Ocupacion").val("");
-	$("#Mi_Direccion").val("");
-	$("#Mi_tiempo").val("");
-	$("#CI").val("");
-	$("#imagenmuestra").attr("src","");
-	$("#imagenactual").val("");
+    $("#Mi_Ocupacion").val("");
+        $("#Mi_Direccion").val("");
+        $("#Mi_tiempo").val("");
+        $("#CI").val("");
+        $("#departamento_id").val("");
+        $('#departamento_id').selectpicker('refresh');
+        $("#ciudad_id").val("");
+        $('#ciudad_id').selectpicker('refresh');
+        $("#estado_civil_id").val("");
+        $('#estado_civil_id').selectpicker('refresh');
+        $("#CarnetDiscapacidad").val("");
+        $('#CarnetDiscapacidad').selectpicker('refresh');
+        $("#imagenmuestra").attr("src","");
+        $("#imagenactual").val("");
 }
 
 function mostrarform(flag){
@@ -107,19 +132,24 @@ function mostrar(Mi_id){
 		$("#Mi_FechaNacimiento").selectpicker('refresh');
 		$("#Mi_Celular").val(data.Mi_Celular);
 		$("#Mi_Email").val(data.Mi_Email);
-		$("#Mi_Departamento").val(data.Mi_Departamento);
-		$("#Mi_Departamento").selectpicker('refresh');
-		$("#Mi_Ocupacion").val(data.Mi_Ocupacion);
-		$("#Mi_Direccion").val(data.Mi_Direccion);
-		$("#Mi_tiempo").val(data.Mi_tiempo);
-		$("#CI").val(data.CI);
-		$("#Civil").val(data.Civil);
-		$("#Civil").selectpicker('refresh');
-		$("#CarnetDiscapacidad").val(data.CarnetDiscapacidad);
-		$("#CarnetDiscapacidad").selectpicker('refresh');
-		$("#imagenmuestra").show();
-		$("#imagenmuestra").attr("src","../files/usuarios/"+data.imagen);
-		$("#imagenactual").val(data.imagen);
+                $("#departamento_id").val(data.departamento_id);
+                $('#departamento_id').selectpicker('refresh');
+                $.post("../ajax/tbl_miembros.php?op=selectCiudades&departamento_id="+data.departamento_id,function(r){
+                        $("#ciudad_id").html(r);
+                        $('#ciudad_id').val(data.ciudad_id);
+                        $('#ciudad_id').selectpicker('refresh');
+                });
+                $("#Mi_Ocupacion").val(data.Mi_Ocupacion);
+                $("#Mi_Direccion").val(data.Mi_Direccion);
+                $("#Mi_tiempo").val(data.Mi_tiempo);
+                $("#CI").val(data.CI);
+                $("#estado_civil_id").val(data.estado_civil_id);
+                $('#estado_civil_id').selectpicker('refresh');
+                $("#CarnetDiscapacidad").val(data.CarnetDiscapacidad);
+                $('#CarnetDiscapacidad').selectpicker('refresh');
+                $("#imagenmuestra").show();
+                $("#imagenmuestra").attr("src","../files/usuarios/"+data.imagen);
+                $("#imagenactual").val(data.imagen);
     })
 }
 
