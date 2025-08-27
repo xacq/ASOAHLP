@@ -51,6 +51,9 @@ function limpiar(){
         $('#CarnetDiscapacidad').selectpicker('refresh');
         $("#imagenmuestra").attr("src","");
         $("#imagenactual").val("");
+        $("#tipo_documento").val("");
+        $("#documento").val("");
+        $("#tblDocumentos tbody").html("");
 }
 
 function mostrarform(flag){
@@ -111,14 +114,22 @@ function guardaryeditar(e){
         contentType: false,
         processData: false,
         success: function(datos)  // si todo va bien con el ajax se ejecuta esto y recibe los datos en ¨datos¨
-        {                    
-                //bootbox.alert(datos);	          
-                alert(datos);	          
+        {
+                //bootbox.alert(datos);
+                alert(datos);
                 mostrarform(false);
+                tabla.ajax.reload(null,false);
                 tabla.ajax.reload();
+                listarDocumentos($("#Mi_id").val());
         }
     });
     limpiar();
+}
+
+function listarDocumentos(Mi_id){
+    $.post("../ajax/tbl_miembros.php?op=listarDocumentos", {Mi_id : Mi_id}, function(r){
+        $("#tblDocumentos tbody").html(r);
+    });
 }
 
 function mostrar(Mi_id){
@@ -150,6 +161,7 @@ function mostrar(Mi_id){
                 $("#imagenmuestra").show();
                 $("#imagenmuestra").attr("src","../files/usuarios/"+data.imagen);
                 $("#imagenactual").val(data.imagen);
+                listarDocumentos(data.Mi_id);
     })
 }
 
@@ -159,7 +171,7 @@ function desactivar(Mi_id){
     {
         $.post("../ajax/tbl_miembros.php?op=desactivar", {Mi_id : Mi_id}, function(e){
             alert(e);
-            tabla.ajax.reload();
+            tabla.ajax.reload(null,false);
         });	
     }
 }
@@ -170,7 +182,7 @@ function activar(Mi_id){
     {
         $.post("../ajax/tbl_miembros.php?op=activar", {Mi_id : Mi_id}, function(e){
             alert(e);
-            tabla.ajax.reload();
+            tabla.ajax.reload(null,false);
         });	
     }
 }

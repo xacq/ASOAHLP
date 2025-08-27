@@ -74,6 +74,15 @@ function listar(){
         }).DataTable();
 }
 
+function buscarPorCI(){
+    var ci = $("#ciBuscar").val();
+    if(ci){
+        tabla.ajax.url('../ajax/tbl_apoyo_miembros.php?op=buscarPorCI&CI='+ci).load();
+    }else{
+        tabla.ajax.url('../ajax/tbl_apoyo_miembros.php?op=listar').load();
+    }
+}
+
 
 function guardaryeditar(e){
     e.preventDefault();  // no se realiza la accion por defecto
@@ -90,7 +99,7 @@ function guardaryeditar(e){
                 //bootbox.alert(datos);	          
                 alert(datos);	          
                 mostrarform(false);
-                tabla.ajax.reload();
+                tabla.ajax.reload(null,false);
         }
     });
     limpiar();
@@ -123,7 +132,7 @@ function desactivar(ApoMi_id){
         {
         	$.post("../ajax/tbl_apoyo_miembros.php?op=desactivar", {ApoMi_id : ApoMi_id}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 	//})
@@ -137,7 +146,7 @@ function activar(ApoMi_id){
         {
         	$.post("../ajax/tbl_apoyo_miembros.php?op=activar", {ApoMi_id : ApoMi_id}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 	//})

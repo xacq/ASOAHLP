@@ -110,7 +110,7 @@ function guardaryeditar(e)
 	    {                    
 	          alert(datos);	          
 	          mostrarform(false);
-	          tabla.ajax.reload();
+	          tabla.ajax.reload(null,false);
 	    }
 
 	});
@@ -154,7 +154,7 @@ function desactivar(MeDi_id)
         {
         	$.post("../ajax/tbl_mesa_directiva.php?op=desactivar", {MeDi_id : MeDi_id}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 //	})
@@ -169,7 +169,7 @@ function activar(MeDi_id)
         {
         	$.post("../ajax/tbl_mesa_directiva.php?op=activar", {MeDi_id : MeDi_id}, function(e){
         		alert(e);
-	            tabla.ajax.reload();
+	            tabla.ajax.reload(null,false);
         	});	
         }
 	//})
