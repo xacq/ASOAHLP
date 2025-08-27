@@ -128,7 +128,7 @@ function mostrar(idarticulo){
 }
 
 function desactivar(idarticulo){
-    var opcion = confirm("¿Está Seguro de desactivar la artículo?");
+    var opcion = confirm("¿Está Seguro de inactivar el artículo?");
 	//confirm("¿Está Seguro de desactivar el artículo?", function(result){
 		if(opcion)
         {

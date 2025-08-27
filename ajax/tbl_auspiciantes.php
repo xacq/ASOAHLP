@@ -41,17 +41,17 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
-		// cambiamos a 0 el estado con el metodo definido
-		$rspta = $tbl_auspiciantes->desactivar($aus_id);
- 		echo $rspta ? "Auspiciante Desactivado" : "Auspiciante no se puede desactivar";
-	break;
+        case 'desactivar':
+                // cambiamos a Inactivo el estado con el metodo definido
+                $rspta = $tbl_auspiciantes->desactivar($aus_id);
+                echo $rspta ? "Auspiciante inactivo" : "Auspiciante no se puede inactivar";
+        break;
 
-	case 'activar':
-		// cambiamos a 1 el estado con el metodo definido
-		$rspta = $tbl_auspiciantes->activar($aus_id);
- 		echo $rspta ? "Auspiciante activado" : "Auspiciante no se puede activar";
-	break;
+        case 'activar':
+                // cambiamos a Activo el estado con el metodo definido
+                $rspta = $tbl_auspiciantes->activar($aus_id);
+                echo $rspta ? "Auspiciante activo" : "Auspiciante no se puede activar";
+        break;
 
 	case 'mostrar':
 		$rspta = $tbl_auspiciantes->mostrar($aus_id);
@@ -83,8 +83,8 @@ switch ($_GET["op"]){
 					"4"=>$reg->aus_ciudad,
 					"5"=>$reg->Otro_dato,
 					"6"=>"<img src='../files/auspiciantes/".$reg->imagen."' height='50px' width='50px' >",
-					"7"=>($reg->condicion)? '<span>activado</span>' : '<span>desactivado</span>'
- 			);
+                                        "7"=>($reg->condicion)? '<span>Activo</span>' : '<span>Inactivo</span>'
+                        );
 		
  		}
  		$results = array(

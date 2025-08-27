@@ -117,7 +117,7 @@ function mostrar(ApoMi_id){
 }
 
 function desactivar(ApoMi_id){
-    var opcion = confirm("¿Está seguro de DESACTIVAR el usuario?");
+    var opcion = confirm("¿Está seguro de INACTIVAR el usuario?");
 	//confirm("¿Está Seguro de desactivar el usuario?", function(result){
 		if(opcion)
         {

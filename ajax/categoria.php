@@ -24,17 +24,17 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
-		// cambiamos a 0 el estado con el metodo definido
-		$rspta = $categoria->desactivar($idcategoria);
- 		echo $rspta ? "Categoría Desactivada" : "Categoría no se puede desactivar";
-	break;
+        case 'desactivar':
+                // cambiamos a Inactivo el estado con el metodo definido
+                $rspta = $categoria->desactivar($idcategoria);
+                echo $rspta ? "Categoría inactiva" : "Categoría no se puede inactivar";
+        break;
 
-	case 'activar':
-		// cambiamos a 1 el estado con el metodo definido
-		$rspta = $categoria->activar($idcategoria);
- 		echo $rspta ? "Categoría activada" : "Categoría no se puede activar";
-	break;
+        case 'activar':
+                // cambiamos a Activo el estado con el metodo definido
+                $rspta = $categoria->activar($idcategoria);
+                echo $rspta ? "Categoría activa" : "Categoría no se puede activar";
+        break;
 
 	case 'mostrar':
 		$rspta = $categoria->mostrar($idcategoria);
@@ -61,10 +61,10 @@ switch ($_GET["op"]){
 			$data[]=array(
 				
  				"0"=>($reg->condicion)? '<button class="btn btn-warning" onclick="mostrar('.$reg->idcategoria.')">editar</button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idcategoria.')">desactivar</button>' 
+ 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idcategoria.')">Inactivar</button>' 
 					 :
  					'<button class="btn btn-warning" onclick="mostrar('.$reg->idcategoria.')">editar</button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->idcategoria.')">activar</button>',
+ 					' <button class="btn btn-primary" onclick="activar('.$reg->idcategoria.')">Activar</button>',
 
 				// "0"=>'<button class="btn btn-warning" onclick="mostrar(' . $reg->idcategoria . ')">editar</button>'
 				// .' <button class="btn btn-danger" onclick="desactivar('.$reg->idcategoria.')">descativar</button>'
@@ -72,7 +72,7 @@ switch ($_GET["op"]){
 				
 				"1"=>$reg->nombre,
  				"2"=>$reg->descripcion,
- 				"3"=>($reg->condicion)? '<span>activado</span>' : '<span>desactivado</span>'
+ 				"3"=>($reg->condicion)? '<span>Activo</span>' : '<span>Inactivo</span>'
 				
  			);
 		

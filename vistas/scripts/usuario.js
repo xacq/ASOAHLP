@@ -147,7 +147,7 @@ function mostrar(idusuario)
 //Función para desactivar registros
 function desactivar(idusuario)
 {
-	var opcion = confirm("¿Está Seguro de desactivar el Usuario?");
+	var opcion = confirm("¿Está Seguro de inactivar el Usuario?");
 //	confirm("¿Está Seguro de desactivar el usuario?", function(result){
 		if(opcion)
         {

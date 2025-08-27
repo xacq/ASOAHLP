@@ -9,7 +9,7 @@ Class Tbl_miembros{
 
     // insertar
     public function insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen){
-        $sql = "INSERT INTO tbl_miembros (Mi_Nombres,Mi_Apellido,Mi_FechaNacimiento,Mi_Celular,Mi_Email,ciudad_id,Mi_Ocupacion,Mi_Direccion,Mi_tiempo,CI,estado_civil_id,CarnetDiscapacidad,imagen,condicion) VALUES ('$Mi_Nombres','$Mi_Apellido','$Mi_FechaNacimiento','$Mi_Celular','$Mi_Email','$ciudad_id','$Mi_Ocupacion','$Mi_Direccion','$Mi_tiempo','$CI','$estado_civil_id','$CarnetDiscapacidad','$imagen', '1')";
+        $sql = "INSERT INTO tbl_miembros (Mi_Nombres,Mi_Apellido,Mi_FechaNacimiento,Mi_Celular,Mi_Email,ciudad_id,Mi_Ocupacion,Mi_Direccion,Mi_tiempo,CI,estado_civil_id,CarnetDiscapacidad,imagen,Mi_Estado) VALUES ('$Mi_Nombres','$Mi_Apellido','$Mi_FechaNacimiento','$Mi_Celular','$Mi_Email','$ciudad_id','$Mi_Ocupacion','$Mi_Direccion','$Mi_tiempo','$CI','$estado_civil_id','$CarnetDiscapacidad','$imagen','Activo')";
         return ejecutarConsulta($sql);
     }
 
@@ -20,15 +20,15 @@ Class Tbl_miembros{
         //UPDATE `tbl_miembros` SET `Mi_FechaNacimiento` = '1996-08-03' WHERE `tbl_miembros`.`Mi_id` = 9
     }
 
-    // eliminar = desactivar osea condicion = 0
+    // cambiar estado a Inactivo
     public function desactivar($Mi_id){
-        $sql = "UPDATE tbl_miembros SET condicion='0' WHERE Mi_id='$Mi_id'";
+        $sql = "UPDATE tbl_miembros SET Mi_Estado='Inactivo' WHERE Mi_id='$Mi_id'";
         return ejecutarConsulta($sql);
     }
 
-    // activar = activar osea condicion = 1
+    // cambiar estado a Activo
     public function activar($Mi_id){
-        $sql = "UPDATE tbl_miembros SET condicion='1' WHERE Mi_id='$Mi_id'";
+        $sql = "UPDATE tbl_miembros SET Mi_Estado='Activo' WHERE Mi_id='$Mi_id'";
         return ejecutarConsulta($sql);
     }
 
@@ -46,7 +46,7 @@ Class Tbl_miembros{
 
     public function select()
         {
-                $sql="SELECT * FROM tbl_miembros WHERE condicion=1";
+                $sql="SELECT * FROM tbl_miembros WHERE Mi_Estado='Activo'";
                 return ejecutarConsulta($sql);
         }
 

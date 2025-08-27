@@ -99,7 +99,7 @@ function mostrar(idcategoria){
 }
 
 function desactivar(idcategoria){
-    var opcion = confirm("¿Está Seguro de desactivar la Categoría?");
+    var opcion = confirm("¿Está Seguro de inactivar la Categoría?");
     if(opcion) 		// entra solo si da ACEPTAR
     {
         $.post("../ajax/categoria.php?op=desactivar", {idcategoria : idcategoria}, function(e){

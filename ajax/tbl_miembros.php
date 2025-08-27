@@ -50,15 +50,15 @@ switch ($_GET["op"]){
         break;
 
         case 'desactivar':
-                // cambiamos a 0 el estado con el metodo definido
+                // cambiamos a Inactivo el estado con el metodo definido
                 $rspta = $tbl_miembros->desactivar($Mi_id);
-                echo $rspta ? "Usuario pasivo" : "Usuario no se puede desactivar";
+                echo $rspta ? "Miembro inactivo" : "Miembro no se puede inactivar";
         break;
 
         case 'activar':
-                // cambiamos a 1 el estado con el metodo definido
+                // cambiamos a Activo el estado con el metodo definido
                 $rspta = $tbl_miembros->activar($Mi_id);
-                echo $rspta ? "Usuario activo" : "Us no se puede activar";
+                echo $rspta ? "Miembro activo" : "Miembro no se puede activar";
         break;
 
         case 'mostrar':
@@ -78,7 +78,7 @@ switch ($_GET["op"]){
                          // guardamos en el array data los valores de reg
                         $data[]=array(
 
-                                "0"=>($reg->condicion)? '<button class="btn btn-warning" onclick="mostrar('.$reg->Mi_id.')"><i class="fa fa-edit" style="font-size:24px"></i></button>'.
+                                "0"=>($reg->Mi_Estado=='Activo')? '<button class="btn btn-warning" onclick="mostrar('.$reg->Mi_id.')"><i class="fa fa-edit" style="font-size:24px"></i></button>'.
                                         ' <button class="btn btn-danger" onclick="desactivar('.$reg->Mi_id.')"> <i class="fa fa-times-rectangle" style="font-size:24px"></i></button>'
                                          :
                                         '<button class="btn btn-warning" onclick="mostrar('.$reg->Mi_id.')"><i class="fa fa-edit" style="font-size:24px"></i></button>'.
@@ -97,7 +97,7 @@ switch ($_GET["op"]){
                                 "11"=>$reg->EstadoCivil,
                                 "12"=>$reg->CarnetDiscapacidad,
                                 "13"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px' >",
-                                "14"=>($reg->condicion)? '<span>activo</span>' : '<span>Pasivo</span>'
+                                "14"=>($reg->Mi_Estado=='Activo')? '<span>Activo</span>' : '<span>Inactivo</span>'
                         );
                 }
                 $results = array(

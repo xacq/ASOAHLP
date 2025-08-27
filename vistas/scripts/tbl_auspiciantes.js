@@ -111,7 +111,7 @@ function mostrar(aus_id){
 }
 
 function desactivar(aus_id){
-    var opcion = confirm("¿Está Seguro de desactivar este auspiciantes?");
+    var opcion = confirm("¿Está Seguro de inactivar este auspiciantes?");
     if(opcion) 		// entra solo si da ACEPTAR
     {
         $.post("../ajax/tbl_auspiciantes.php?op=desactivar", {aus_id : aus_id}, function(e){
