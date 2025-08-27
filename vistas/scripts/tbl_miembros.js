@@ -154,7 +154,7 @@ function mostrar(Mi_id){
 }
 
 function desactivar(Mi_id){
-    var opcion = confirm("¿Está Seguro de desactivar este usuario?");
+    var opcion = confirm("¿Está Seguro de inactivar este usuario?");
     if(opcion) 		// entra solo si da ACEPTAR
     {
         $.post("../ajax/tbl_miembros.php?op=desactivar", {Mi_id : Mi_id}, function(e){

@@ -45,17 +45,17 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
-		$rspta=$articulo->desactivar($idarticulo);
- 		echo $rspta ? "Artículo Desactivado" : "Artículo no se puede desactivar";
- 		break;
-	break;
+        case 'desactivar':
+                $rspta=$articulo->desactivar($idarticulo);
+                echo $rspta ? "Artículo inactivo" : "Artículo no se puede inactivar";
+                break;
+        break;
 
-	case 'activar':
-		$rspta=$articulo->activar($idarticulo);
- 		echo $rspta ? "Artículo activado" : "Artículo no se puede activar";
- 		break;
-	break;
+        case 'activar':
+                $rspta=$articulo->activar($idarticulo);
+                echo $rspta ? "Artículo activo" : "Artículo no se puede activar";
+                break;
+        break;
 
 	case 'mostrar':
 		$rspta=$articulo->mostrar($idarticulo);
@@ -72,17 +72,17 @@ switch ($_GET["op"]){
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
  				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idarticulo.')">editar</button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idarticulo.')">desactivar</button>'
+ 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idarticulo.')">Inactivar</button>'
 					 :
  					'<button class="btn btn-warning" onclick="mostrar('.$reg->idarticulo.')">editar</button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->idarticulo.')">activar</button>',
+ 					' <button class="btn btn-primary" onclick="activar('.$reg->idarticulo.')">Activar</button>',
  				"1"=>$reg->nombre,
  				"2"=>$reg->categoria,
  				"3"=>$reg->codigo,
  				"4"=>$reg->stock,
  				"5"=>"<img src='../files/articulos/".$reg->imagen."' height='50px' width='50px' >",
 				//"5"=>$reg->imagen,
- 				"6"=>($reg->condicion)?'<span>Activado</span>':'<span>Desactivado</span>'
+ 				"6"=>($reg->condicion)?'<span>Activo</span>':'<span>Inactivo</span>'
  				);
  		}
  		$results = array(

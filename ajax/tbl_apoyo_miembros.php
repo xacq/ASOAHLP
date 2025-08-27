@@ -23,17 +23,17 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
-		$rspta=$tbl_apoyo_miembros->desactivar($ApoMi_id);
- 		echo $rspta ? "Tipo de ayuda Desactivada" : "Tipo de ayuda no se puede desactivar";
- 		break;
-	break;
+        case 'desactivar':
+                $rspta=$tbl_apoyo_miembros->desactivar($ApoMi_id);
+                echo $rspta ? "Tipo de ayuda inactiva" : "Tipo de ayuda no se puede inactivar";
+                break;
+        break;
 
-	case 'activar':
-		$rspta=$tbl_apoyo_miembros->activar($ApoMi_id);
- 		echo $rspta ? "Tipo de ayuda activada" : "Tipo de ayuda no se puede activar";
- 		break;
-	break;
+        case 'activar':
+                $rspta=$tbl_apoyo_miembros->activar($ApoMi_id);
+                echo $rspta ? "Tipo de ayuda activa" : "Tipo de ayuda no se puede activar";
+                break;
+        break;
 
 	case 'mostrar':
 		$rspta=$tbl_apoyo_miembros->mostrar($ApoMi_id);
@@ -59,8 +59,8 @@ switch ($_GET["op"]){
  				"3"=>$reg->ApoMi_Cantidad,
  				"4"=>$reg->ApoMi_Observaciones,
 				"5"=>$reg->ApoMi_registro,
- 				"6"=>($reg->condicion)?'<span>Activado</span>':'<span>Desactivado</span>'
- 				);
+                                "6"=>($reg->condicion)?'<span>Activo</span>':'<span>Inactivo</span>'
+                                );
  		}
  		$results = array(
  			"sEcho"=>1, //Información para el datatables

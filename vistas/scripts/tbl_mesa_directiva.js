@@ -148,7 +148,7 @@ function mostrar(MeDi_id)
 //Función para desactivar registros
 function desactivar(MeDi_id)
 {
-	var opcion = confirm("¿Está Seguro de desactivar el Usuario?");
+    var opcion = confirm("¿Está Seguro de inactivar el Usuario?");
 //	confirm("¿Está Seguro de desactivar el usuario?", function(result){
 		if(opcion)
         {

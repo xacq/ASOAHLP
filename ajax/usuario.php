@@ -48,15 +48,15 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
-		$rspta=$usuario->desactivar($idusuario);
- 		echo $rspta ? "Usuario Desactivado" : "Usuario no se puede desactivar";
-	break;
+        case 'desactivar':
+                $rspta=$usuario->desactivar($idusuario);
+                echo $rspta ? "Usuario inactivo" : "Usuario no se puede inactivar";
+        break;
 
-	case 'activar':
-		$rspta=$usuario->activar($idusuario);
- 		echo $rspta ? "Usuario activado" : "Usuario no se puede activar";
-	break;
+        case 'activar':
+                $rspta=$usuario->activar($idusuario);
+                echo $rspta ? "Usuario activo" : "Usuario no se puede activar";
+        break;
 
 	//editar
 	case 'mostrar':
@@ -72,10 +72,10 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">editar</button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idusuario.')">descativar</button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">editar</button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->idusuario.')">activar</button>',
+                                "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">editar</button>'.
+                                        ' <button class="btn btn-danger" onclick="desactivar('.$reg->idusuario.')">Inactivar</button>':
+                                        '<button class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">editar</button>'.
+                                        ' <button class="btn btn-primary" onclick="activar('.$reg->idusuario.')">Activar</button>',
  				"1"=>$reg->nombre,
  				"2"=>$reg->tipo_documento,
  				"3"=>$reg->num_documento,
@@ -84,8 +84,8 @@ switch ($_GET["op"]){
  				"6"=>$reg->login,
  				"7"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px' >",
 				//"7"=>$reg->imagen,
- 				"8"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':
- 				'<span class="label bg-red">Desactivado</span>'
+                                "8"=>($reg->condicion)?'<span class="label bg-green">Activo</span>':
+                                '<span class="label bg-red">Inactivo</span>'
  				);
  		}
  		$results = array(

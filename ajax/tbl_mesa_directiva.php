@@ -43,15 +43,15 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
-		$rspta=$tbl_mesa_directiva->desactivar($MeDi_id);
- 		echo $rspta ? "Usuario Desactivado" : "Usuario no se puede desactivar";
-	break;
+        case 'desactivar':
+                $rspta=$tbl_mesa_directiva->desactivar($MeDi_id);
+                echo $rspta ? "Usuario inactivo" : "Usuario no se puede inactivar";
+        break;
 
-	case 'activar':
-		$rspta=$tbl_mesa_directiva->activar($MeDi_id);
- 		echo $rspta ? "Usuario activado" : "Usuario no se puede activar";
-	break;
+        case 'activar':
+                $rspta=$tbl_mesa_directiva->activar($MeDi_id);
+                echo $rspta ? "Usuario activo" : "Usuario no se puede activar";
+        break;
 
 	//editar
 	case 'mostrar':
@@ -68,19 +68,18 @@ switch ($_GET["op"]){
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
  				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->MeDi_id.')">editar</button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->MeDi_id.')">descativar</button>':
+ 					' <button class="btn btn-danger" onclick="desactivar('.$reg->MeDi_id.')">Inactivar</button>':
  					'<button class="btn btn-warning" onclick="mostrar('.$reg->MeDi_id.')">editar</button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->MeDi_id.')">activar</button>',
+ 					' <button class="btn btn-primary" onclick="activar('.$reg->MeDi_id.')">Activar</button>',
  				"1"=>$reg->tbl_miembros,
  				"2"=>$reg->cargo,
  				"3"=>$reg->MeDi_FechaInicioFunciones,
  				"4"=>$reg->login,
  				"5"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px' >",
 				//"7"=>$reg->imagen,
- 				//"6"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':
- 				'<span class="label bg-red">Desactivado</span>'
- 				);
- 		}
+                                "6"=>($reg->condicion)?'<span>Activo</span>':'<span>Inactivo</span>'
+                                );
+                }
  		$results = array(
  			"sEcho"=>1, //Información para el datatables
  			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
