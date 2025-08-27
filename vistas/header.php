@@ -42,12 +42,13 @@ if (strlen(session_id()) < 1){
   <link rel="stylesheet" href="../public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
    <!-- DATATABLES -->
-   <link rel="stylesheet" type="../public/text/css" href="datatables/jquery.dataTables.min.css">    
+   <link rel="stylesheet" type="../public/text/css" href="datatables/jquery.dataTables.min.css">
   <link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
   <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
   <!-- select mas esteticos -->
   <link  type="text/css"  href="../public/css/bootstrap-select.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../public/css/alertas.css">
 
   
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

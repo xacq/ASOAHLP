@@ -1,0 +1,23 @@
+.alertas-container {
+  margin: 15px 0;
+}
+
+.badge-alerta {
+  display: inline-block;
+  background-color: #ffe0b2;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin: 3px;
+}
+
+.badge-alerta.badge-leida {
+  background-color: #dcedc8;
+}
+
+.badge-alerta a {
+  color: #333;
+  margin-left: 6px;
+  text-decoration: none;
+}
+

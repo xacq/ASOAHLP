@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_miembros` (
   `imagen` VARCHAR(50) NOT NULL,
   `Mi_Estado` ENUM('Activo','Inactivo') NOT NULL DEFAULT 'Activo',
   PRIMARY KEY (`Mi_id`),
+  INDEX `CI_idx` (`CI` ASC),
   INDEX `fk_miembros_ciudad_idx` (`ciudad_id` ASC),
   INDEX `fk_miembros_estado_civil_idx` (`estado_civil_id` ASC),
   CONSTRAINT `fk_miembros_ciudad`
@@ -133,6 +134,26 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_apoyo_miembros` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_documentos_miembro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_documentos_miembro` (
+  `Doc_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Mi_id` INT(11) NOT NULL,
+  `tipo_documento` VARCHAR(100) NULL DEFAULT NULL,
+  `ruta_archivo` VARCHAR(200) NULL DEFAULT NULL,
+  `fecha_subida` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Doc_id`),
+  INDEX `fk_documento_miembro_idx` (`Mi_id` ASC),
+  CONSTRAINT `fk_documento_miembro`
+    FOREIGN KEY (`Mi_id`)
+    REFERENCES `dbasochipo`.`tbl_miembros` (`Mi_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -347,6 +368,7 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_tiposhipoacusia` (
   `hipo_id` INT(11) NOT NULL AUTO_INCREMENT,
   `hipo_nombre` VARCHAR(200) NULL DEFAULT NULL,
   `hipo_Descripcion` LONGTEXT NULL DEFAULT NULL,
+  `imagen` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`hipo_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -364,11 +386,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `dbasochipo`.`usuario_permiso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
-  `idusuario_permiso` INT NOT NULL,
-  `MeDi_id` INT NOT NULL,
+  -- Table `dbasochipo`.`usuario_permiso`
+  -- -----------------------------------------------------
+  CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
+    `idusuario_permiso` INT NOT NULL,
+    `MeDi_id` INT NOT NULL,
   `idpermiso` INT NOT NULL,
   PRIMARY KEY (`idusuario_permiso`),
   INDEX `fk_usuariopermiso_mesadirectiva_idx` (`MeDi_id` ASC),
@@ -383,7 +405,28 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
     REFERENCES `dbasochipo`.`permiso` (`idpermiso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_alertas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_alertas` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tipo_alerta` VARCHAR(50) NOT NULL,
+  `Mi_id` INT(11) NOT NULL,
+  `fecha` DATE NOT NULL,
+  `leida` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  INDEX `fk_alerta_miembro_idx` (`Mi_id` ASC),
+  CONSTRAINT `fk_alerta_miembro`
+    FOREIGN KEY (`Mi_id`)
+    REFERENCES `dbasochipo`.`tbl_miembros` (`Mi_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------
@@ -402,3 +445,6 @@ DEFAULT CHARACTER SET = utf8mb4;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+  SET SQL_MODE=@OLD_SQL_MODE;
+  SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+  SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

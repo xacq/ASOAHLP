@@ -84,7 +84,7 @@ require 'header.php';
                      <!-- el div de formularioregistros -->
                     <div class="panel-body" id="formularioregistros">
 
-                        <form name="formulario" id="formulario" method="POST">
+                        <form name="formulario" id="formulario" method="POST" enctype="multipart/form-data">
                           
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Nombres(*):</label>
@@ -167,6 +167,30 @@ require 'header.php';
                             <input type="file" class="form-control" name="imagen" id="imagen">
                             <input type="hidden" name="imagenactual" id="imagenactual">
                             <img src="" width="150px" height="120px" id="imagenmuestra">
+                          </div>
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Tipo de documento:</label>
+                            <input type="text" class="form-control" name="tipo_documento" id="tipo_documento" maxlength="100">
+                          </div>
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Documento (PDF):</label>
+                            <input type="file" class="form-control" name="documento" id="documento" accept="application/pdf">
+                          </div>
+
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <table class="table table-striped" id="tblDocumentos">
+                              <thead>
+                                <tr>
+                                  <th>Tipo</th>
+                                  <th>Archivo</th>
+                                  <th>Fecha</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
                           </div>
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

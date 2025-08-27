@@ -48,14 +48,24 @@ Class Tbl_apoyo_miembros
 	}
 
 	//Implementar un método para listar los registros
-	public function listar()
-	{
-		$sql="SELECT a.ApoMi_id,a.Mi_id,c.Mi_Nombres as tbl_miembros,
-			a.TiApo,a.ApoMi_Cantidad,a.ApoMi_Observaciones,a.ApoMi_registro,a.condicion 
-			FROM tbl_apoyo_miembros a INNER JOIN tbl_miembros c  
-			ON a.Mi_id=c.Mi_id";			
-		return ejecutarConsulta($sql);		
-	}
+        public function listar()
+        {
+                $sql="SELECT a.ApoMi_id,a.Mi_id,c.Mi_Nombres as tbl_miembros,
+                        a.TiApo,a.ApoMi_Cantidad,a.ApoMi_Observaciones,a.ApoMi_registro,a.condicion
+                        FROM tbl_apoyo_miembros a INNER JOIN tbl_miembros c
+                        ON a.Mi_id=c.Mi_id";
+                return ejecutarConsulta($sql);
+        }
+
+        //Obtener donaciones filtradas por CI del miembro
+        public function buscarPorCI($CI)
+        {
+                $sql="SELECT a.ApoMi_id,a.Mi_id,c.Mi_Nombres as tbl_miembros,
+                        a.TiApo,a.ApoMi_Cantidad,a.ApoMi_Observaciones,a.ApoMi_registro,a.condicion
+                        FROM tbl_apoyo_miembros a INNER JOIN tbl_miembros c
+                        ON a.Mi_id=c.Mi_id WHERE c.CI='$CI'";
+                return ejecutarConsulta($sql);
+        }
 }
 
 ?>
