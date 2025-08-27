@@ -42,12 +42,13 @@ if (strlen(session_id()) < 1){
   <link rel="stylesheet" href="../public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
    <!-- DATATABLES -->
-   <link rel="stylesheet" type="../public/text/css" href="datatables/jquery.dataTables.min.css">    
+   <link rel="stylesheet" type="../public/text/css" href="datatables/jquery.dataTables.min.css">
   <link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
   <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
   <!-- select mas esteticos -->
   <link  type="text/css"  href="../public/css/bootstrap-select.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../public/css/alertas.css">
 
   
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -156,6 +157,7 @@ if (strlen(session_id()) < 1){
             <li class="nav-item"><a href="inventario.php"><i class="fa fa-circle-o"></i> Inventario</a></li>
             <li class="nav-item"><a href="multas.php"><i class="fa fa-circle-o"></i> Multas</a></li>
             <li class="nav-item"><a href="especialidades.php"><i class="fa fa-circle-o"></i> Especialidades</a></li>                              
+            <li class="nav-item"><a href="reportes.php"><i class="fa fa-circle-o"></i> Reportes</a></li>
           </ul>
         </li>
         <?php
@@ -192,6 +194,7 @@ if (strlen(session_id()) < 1){
           </a>
           <ul class="treeview-menu">
             <li class="nav-item"><a href="especialidades.php"><i class="fa fa-circle-o"></i> Especialidades </a></li>
+            <li class="nav-item"><a href="reportes.php"><i class="fa fa-circle-o"></i> Reportes</a></li>
             <li class="nav-item"><a href="tiposdehipoacusia.php"><i class="fa fa-circle-o"></i> Tipos de Hipoacusia</a></li>
             <li class="nav-item"><a href="tiposdeapoyo.php"><i class="fa fa-circle-o"></i> Tipos de Apoyo </a></li>
             <li class="nav-item"><a href="tiposdeinventario.php"><i class="fa fa-circle-o"></i> Tipos de Inventario</a></li>

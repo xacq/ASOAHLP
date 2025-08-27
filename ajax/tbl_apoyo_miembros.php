@@ -42,10 +42,10 @@ switch ($_GET["op"]){
  		break;
 	break;
 
-	case 'listar':
-		$rspta=$tbl_apoyo_miembros->listar();
- 		//Vamos a declarar un array
- 		$data= Array();
+        case 'listar':
+                $rspta=$tbl_apoyo_miembros->listar();
+                //Vamos a declarar un array
+                $data= Array();
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
@@ -67,14 +67,43 @@ switch ($_GET["op"]){
  			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
  			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
  			"aaData"=>$data);
- 		echo json_encode($results);
+                echo json_encode($results);
 
-	break;
+        break;
+
+        case 'buscarPorCI':
+                $CI=isset($_GET["CI"])? limpiarCadena($_GET["CI"]):"";
+                $rspta=$tbl_apoyo_miembros->buscarPorCI($CI);
+                $data= Array();
+
+                while ($reg=$rspta->fetch_object()){
+                        $data[]=array(
+                                "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->ApoMi_id.')"> <i class="fa fa-edit" style="font-size:24px"></i> </button>'.
+                                        ' <button class="btn btn-danger" onclick="desactivar('.$reg->ApoMi_id.')"> <i class="fa fa-times-rectangle" style="font-size:24px"></i></button>'
+                                         :
+                                        '<button class="btn btn-warning" onclick="mostrar('.$reg->ApoMi_id.')"> <i class="fa fa-edit" style="font-size:24px"></i> </button>'.
+                                        ' <button class="btn btn-primary" onclick="activar('.$reg->ApoMi_id.')"> <i class="fa fa-check-square-o" style="font-size:24px"></i> </button>',
+                                "1"=>$reg->tbl_miembros,
+                                "2"=>$reg->TiApo,
+                                "3"=>$reg->ApoMi_Cantidad,
+                                "4"=>$reg->ApoMi_Observaciones,
+                                "5"=>$reg->ApoMi_registro,
+                                "6"=>($reg->condicion)?'<span>Activo</span>':'<span>Inactivo</span>'
+                                );
+                }
+                $results = array(
+                        "sEcho"=>1,
+                        "iTotalRecords"=>count($data),
+                        "iTotalDisplayRecords"=>count($data),
+                        "aaData"=>$data);
+                echo json_encode($results);
+
+        break;
 
 
-	/// para seleccionar categoria en el select del form
-	///  Para crear el Select dinamico 
-	case "selectCategoria":
+        /// para seleccionar categoria en el select del form
+        ///  Para crear el Select dinamico
+        case "selectCategoria":
 		//require_once "../modelos/Categoria.php";
 		//$categoria = new Categoria();
 
