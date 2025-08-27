@@ -383,7 +383,26 @@ CREATE TABLE IF NOT EXISTS `dbasochipo`.`usuario_permiso` (
     REFERENCES `dbasochipo`.`permiso` (`idpermiso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbasochipo`.`tbl_historial_miembro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbasochipo`.`tbl_historial_miembro` (
+  `HMi_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Mi_id` INT(11) NOT NULL,
+  `descripcion` VARCHAR(255) NOT NULL,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`HMi_id`),
+  INDEX `fk_historial_miembro_miembros_idx` (`Mi_id` ASC),
+  CONSTRAINT `fk_historial_miembro_miembros`
+    FOREIGN KEY (`Mi_id`)
+    REFERENCES `dbasochipo`.`tbl_miembros` (`Mi_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -10,7 +10,7 @@ Class Tbl_miembros{
     // insertar
     public function insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen){
         $sql = "INSERT INTO tbl_miembros (Mi_Nombres,Mi_Apellido,Mi_FechaNacimiento,Mi_Celular,Mi_Email,ciudad_id,Mi_Ocupacion,Mi_Direccion,Mi_tiempo,CI,estado_civil_id,CarnetDiscapacidad,imagen,Mi_Estado) VALUES ('$Mi_Nombres','$Mi_Apellido','$Mi_FechaNacimiento','$Mi_Celular','$Mi_Email','$ciudad_id','$Mi_Ocupacion','$Mi_Direccion','$Mi_tiempo','$CI','$estado_civil_id','$CarnetDiscapacidad','$imagen','Activo')";
-        return ejecutarConsulta($sql);
+        return ejecutarConsulta_retornarID($sql);
     }
 
     // editar

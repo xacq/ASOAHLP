@@ -1,11 +1,13 @@
 <?php
 require_once "../modelos/tbl_miembros.php";
+require_once "../modelos/tbl_historial_miembro.php";
 
 $tbl_miembros = new Tbl_miembros();
+$tbl_historial = new Tbl_historial_miembro();
 
 // recibimos los valores desde un form con el metodo POST
 // preguntamos si existe un envio en caso de existir se manda  limpiar cadena
-$Mi_id = isset($_POST["Mi_id"])? limpiarCadena($_POST["Mi_id"]) : "";
+$Mi_id = isset($_POST["Mi_id"])? limpiarCadena($_POST["Mi_id"]) : (isset($_GET["Mi_id"]) ? limpiarCadena($_GET["Mi_id"]) : "");
 $Mi_Nombres =isset($_POST["Mi_Nombres"])? limpiarCadena($_POST["Mi_Nombres"]):"";
 $Mi_Apellido =isset($_POST["Mi_Apellido"])? limpiarCadena($_POST["Mi_Apellido"]):"";
 $Mi_FechaNacimiento =isset($_POST["Mi_FechaNacimiento"])? limpiarCadena($_POST["Mi_FechaNacimiento"]):"";
@@ -41,10 +43,16 @@ switch ($_GET["op"]){
                 // es el mismo case por que nos daremos cuenta con el idcategoria si llega vacio o con datos
                 if (empty($Mi_id)){
                         $rspta = $tbl_miembros->insertar($Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen); //rsta viene del modelo 1:ok 0:algo va mal
+                        if($rspta){
+                                $tbl_historial->registrar($rspta,'Alta de miembro');
+                        }
                         echo $rspta ? "Tbl_miembros registrado" : "Tbl_miembros no se pudo registrar";
                 }
                 else {
                         $rspta = $tbl_miembros->editar($Mi_id,$Mi_Nombres,$Mi_Apellido,$Mi_FechaNacimiento,$Mi_Celular,$Mi_Email,$ciudad_id,$Mi_Ocupacion,$Mi_Direccion,$Mi_tiempo,$CI,$estado_civil_id,$CarnetDiscapacidad,$imagen);
+                        if($rspta){
+                                $tbl_historial->registrar($Mi_id,'Actualización de datos');
+                        }
                         echo $rspta ? "Tbl_miembros actualizada" : "Tbl_miembros no se pudo actualizar";
                 }
         break;
@@ -52,12 +60,18 @@ switch ($_GET["op"]){
         case 'desactivar':
                 // cambiamos a Inactivo el estado con el metodo definido
                 $rspta = $tbl_miembros->desactivar($Mi_id);
+                if($rspta){
+                        $tbl_historial->registrar($Mi_id,'Baja de miembro');
+                }
                 echo $rspta ? "Miembro inactivo" : "Miembro no se puede inactivar";
         break;
 
         case 'activar':
                 // cambiamos a Activo el estado con el metodo definido
                 $rspta = $tbl_miembros->activar($Mi_id);
+                if($rspta){
+                        $tbl_historial->registrar($Mi_id,'Reactivación de miembro');
+                }
                 echo $rspta ? "Miembro activo" : "Miembro no se puede activar";
         break;
 
@@ -79,10 +93,12 @@ switch ($_GET["op"]){
                         $data[]=array(
 
                                 "0"=>($reg->Mi_Estado=='Activo')? '<button class="btn btn-warning" onclick="mostrar('.$reg->Mi_id.')"><i class="fa fa-edit" style="font-size:24px"></i></button>'.
-                                        ' <button class="btn btn-danger" onclick="desactivar('.$reg->Mi_id.')"> <i class="fa fa-times-rectangle" style="font-size:24px"></i></button>'
+                                        ' <button class="btn btn-danger" onclick="desactivar('.$reg->Mi_id.')"> <i class="fa fa-times-rectangle" style="font-size:24px"></i></button>'.
+                                        ' <a class="btn btn-info" href="historial_miembro.php?Mi_id='.$reg->Mi_id.'"><i class="fa fa-clock-o" style="font-size:24px"></i></a>'
                                          :
                                         '<button class="btn btn-warning" onclick="mostrar('.$reg->Mi_id.')"><i class="fa fa-edit" style="font-size:24px"></i></button>'.
-                                        ' <button class="btn btn-primary" onclick="activar('.$reg->Mi_id.')"> <i class="fa fa-check-square-o" style="font-size:24px"></i></button>',
+                                        ' <button class="btn btn-primary" onclick="activar('.$reg->Mi_id.')"> <i class="fa fa-check-square-o" style="font-size:24px"></i></button>'.
+                                        ' <a class="btn btn-info" href="historial_miembro.php?Mi_id='.$reg->Mi_id.'"><i class="fa fa-clock-o" style="font-size:24px"></i></a>',
 
                                 "1"=>$reg->Mi_Nombres,
                                 "2"=>$reg->Mi_Apellido,
@@ -104,6 +120,24 @@ switch ($_GET["op"]){
                         "sEcho"=>1, //Información para el datatables
                         "iTotalRecords"=>count($data), //enviamos el total registros al datatable
                         "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+                        "aaData"=>$data);
+                echo json_encode($results);
+
+        break;
+
+        case 'historial':
+                $rspta=$tbl_historial->listar($Mi_id);
+                $data = Array();
+                while ($reg = $rspta->fetch_object()){
+                        $data[]=array(
+                                "0"=>$reg->descripcion,
+                                "1"=>$reg->fecha_registro
+                        );
+                }
+                $results = array(
+                        "sEcho"=>1,
+                        "iTotalRecords"=>count($data),
+                        "iTotalDisplayRecords"=>count($data),
                         "aaData"=>$data);
                 echo json_encode($results);
 
