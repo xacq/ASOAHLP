@@ -6,7 +6,15 @@ use PSpell\Config;
 if (strlen(session_id()) < 1){
   session_start();
 }
-  
+
+// Ensure user session variables exist to avoid undefined index warnings
+$nombre = $_SESSION['nombre'] ?? '';
+$imagen = $_SESSION['imagen'] ?? 'default.png';
+$almacen = $_SESSION['almacen'] ?? 0;
+$compras = $_SESSION['compras'] ?? 0;
+$ventas = $_SESSION['ventas'] ?? 0;
+$accesos = $_SESSION['accesos'] ?? 0;
+
 ?>
 
 
@@ -84,16 +92,16 @@ if (strlen(session_id()) < 1){
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../files/usuarios/<?php echo $_SESSION['imagen']; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $_SESSION['nombre'];?></span>
+            <img src="../files/usuarios/<?php echo $imagen; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $nombre; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-              <img src="../files/usuarios/<?php echo $_SESSION['imagen']; ?>" class="img-circle" alt="User Image">
+              <img src="../files/usuarios/<?php echo $imagen; ?>" class="img-circle" alt="User Image">
 
                 <p>
-                <?php echo $_SESSION['nombre'];?>- Usuario
+                <?php echo $nombre; ?>- Usuario
                   <small>Sistema de Registro</small>
                 </p>
               </li>
@@ -139,7 +147,7 @@ if (strlen(session_id()) < 1){
       
         <?php
 
-          if ($_SESSION['almacen']==1)
+          if ($almacen==1)
           {
         ?>
         <li class="treeview">
@@ -163,7 +171,7 @@ if (strlen(session_id()) < 1){
         <?php
           
           }
-          if ($_SESSION['compras']==1)
+          if ($compras==1)
           {
         ?>
         <li class="treeview">
@@ -181,7 +189,7 @@ if (strlen(session_id()) < 1){
         <?php
           
         }
-        if ($_SESSION['ventas']==1)
+        if ($ventas==1)
         {
       ?>
 
@@ -204,7 +212,7 @@ if (strlen(session_id()) < 1){
         <?php
           
         }
-        if ($_SESSION['accesos']==1)
+        if ($accesos==1)
         {
       ?>
         <li class="treeview">
